@@ -10,7 +10,13 @@ export type TypedArray =
     | Float64Array;
 
 
-export class Vector {
+export interface VectorLike {
+    x: number
+    y: number
+    z: number
+}
+
+export class Vector implements VectorLike{
     x: number = 0
     y: number = 0
     z: number = 0
@@ -23,7 +29,7 @@ export class Vector {
         return new Vector(from)
     }
 
-    static createFromPosition(from: Position): Vector {
+    static createFromPosition(from: VectorLike): Vector {
         return new Vector(new Float32Array([from.x, from.y, from.z]))
     }
 
@@ -76,10 +82,4 @@ export class Vector {
         dotProductSum += this.z * v.z
         return dotProductSum
     }
-}
-
-export interface Position {
-    x: number
-    y: number
-    z: number
 }
